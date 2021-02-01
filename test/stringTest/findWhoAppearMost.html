@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+	<script>
+		function whoAppearMost(ojb)
+		{
+			const str=ojb.value;
+			
+			let json={};
+			let isInputValid=true;
+			
+			for(let i=0;i<str.length;i++)
+			{
+				if((str[i]>='a'&&str[i]<='z')||(str[i]>='A'&&str[i]<='Z'))
+				{
+					if(json[str[i]]===undefined)
+					{
+						json[str[i]]=1;
+					}
+					else
+					{
+						json[str[i]]+=1;
+					}
+				}
+				else
+				{
+					isInputValid=false;
+					break;
+				}
+			}
+			let appearMost=document.getElementById("appearMost");
+			if(isInputValid===true)
+			{
+				let maxValue=0;
+				let maxChar=null;
+				for(let item in json)
+				{
+					if(json[item]>maxValue)
+					{
+						maxValue=json[item];
+						maxChar=item;
+					}
+				}
+				appearMost.innerText=maxChar;
+			}
+			else
+			{
+				appearMost.innerText='输入错误，只能输入字母';
+			}
+		}
+	</script>
+	<p ></p>
+	<textarea style="height: 100px;width: 200px" onkeyup="javascript:whoAppearMost(this);"
+	          onmousedown="javascript:whoAppearMost(this);">
+	</textarea>
+	<p>出现次数最多的字母为:<span id="appearMost"></span></p>
+</body>
+</html>

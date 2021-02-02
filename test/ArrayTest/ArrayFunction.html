@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+	arr=[{id:1,age:18,education:"本科"},{id:2,age:19,education:"初中"},
+		{id:3,age:18,education:"本科"},{id:4,age:19,education:"高中"},{id:5,age:20,education:"小学"}];
+	
+	console.log(addAndDelete(arr));
+	
+	//数组排序
+	console.log(arr.sort((a,b)=>Number(a.age)-Number(b.age)));
+	
+	//forEach遍历,id与arr可以不加。后面的map与filter参数同理
+	arr.forEach((item,id,arr)=>console.log(item));
+	
+	//用map挑选出原数组中的部分元素，变为新的数组，常用！！！！！！！！！！！！！
+	console.log(arr.map((item)=>({age:item.age,education:item.education})));
+	/*另一种写法
+	//因为只有return一句话，所以可以省略
+	arr.map((item)=>{
+		return{
+			age:item.age,education:item.education
+		};
+	});
+	//或者
+	arr.map(function(item){
+		return{
+			age:item.age,education:item.education
+		};
+	})
+	*/
+	
+	//filter，筛选出符合条件（返回值为true）的数组元素
+	console.log(arr.filter((item)=>item.education==='本科'))
+	
+	//reduce，累加器，可以灵活完成求和，统计等多种功能。参数比forEach，map，filter等在开头
+	// 多出一个previousValue，意思是先前所有的值，为必要参数。reduce调用大体为
+	// reduce((previousValue,item,index,arr)=>{...},initialValue)。
+	// 这里的initialValue可加可不加，加上迭代器从数组第一个元素开始运算，previousValue
+	// 取值为initialValue。不加上reduce从数组第二个元素开始运算，此时previousValue为
+	// 数组第一个元素
+	console.log(arr.reduce((
+			(previousValue, currentValue) => previousValue+currentValue.age),0)/arr.length);
+	
+	function addAndDelete(arr)
+	{
+		//向后插入元素
+		arr.push({id:6,age:10,education:"小学"});
+		//向前插入
+		arr.unshift({id:0,age:29,education:"博士"});
+		
+		//pop()与shift()分别为删除最后一个元素和第一个元素
+		
+		//从位置4开始，删除一个元素（任意删除）
+		arr.splice(4,1);
+		return arr;
+	}
+	
+	
+</script>
+</body>
+</html>

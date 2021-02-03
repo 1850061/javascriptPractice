@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script type="text/javascript">
+	function myListTemplate(arr) {
+		return `<ul>
+				${arr.map((item)=>`<li>${item}</li>`).join('')}
+				</ul>`;
+	}
+	document.write(myListTemplate([1,2,3,666,'哈哈哈']))
+</script>
+</body>
+</html>

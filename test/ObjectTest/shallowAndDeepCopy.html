@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<script>
+	let ojb1={};
+	let ojb2={name:'rcw',age:18,birthday:{year:1999,month:10,day:30},
+		interest:['舞龙','中国象棋','睡觉']};
+	deepCopy(ojb1,ojb2);
+	test();
+	
+	function deepCopy(newOjb,oldOjb) {
+		for(let key in oldOjb)
+		{
+			let value=oldOjb[key];
+			if(value instanceof Array)
+			{
+				newOjb[key]=[];
+				deepCopy(newOjb[key],value);
+			}
+			else if(value instanceof Object)
+			{
+				newOjb[key]={};
+				deepCopy(newOjb[key],value);
+			}
+			else
+			{
+				newOjb[key]=value;
+			}
+		}
+	}
+	
+	function shallowCopy(newOjb,oldOjb) {
+		Object.assign(newOjb,oldOjb)
+	}
+	
+	function test() {
+		console.log(ojb1);
+		console.log('----------')
+		ojb2.birthday.day=100;
+		ojb2.interest[2]='去去去';
+		console.log(ojb1);
+	}
+</script>
+</body>
+</html>

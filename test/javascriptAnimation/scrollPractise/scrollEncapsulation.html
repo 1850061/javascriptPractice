@@ -3,8 +3,27 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Title</title>
+	<style>
+		body {
+			height: 6000px;
+			width: 5000px;
+		}
+	</style>
 </head>
 <body>
-
+<script>
+	window.onscroll=function (){
+		console.log(scroll().top);
+		console.log(scroll().left);
+	}
+	
+	//获取页面滚动距离
+	function scroll() {
+		return {
+			top:window.pageYOffset||document.body.scrollTop||document.documentElement.scrollTop,
+			left:window.pageXOffset||document.body.scrollLeft||document.documentElement.scrollLeft
+		}
+	}
+</script>
 </body>
 </html>

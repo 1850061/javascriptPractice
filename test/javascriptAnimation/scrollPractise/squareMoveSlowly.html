@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		div {
+			width: 100px;
+			height: 100px;
+			background-color: pink;
+			position: absolute;
+			left: 0;
+		}
+	</style>
+</head>
+<body>
+<button id="but200" onclick="moveSlowlyTo(200)">移动到200</button>
+<button id="but400" onclick="moveSlowlyTo(400)">移动到400</button>
+<br/>
+<div id="moveMe"></div>
+<script>
+	function moveSlowlyTo(target) {
+		let ele=document.getElementById("moveMe");
+		moveSlowlyAnimate(ele,target);
+	}
+	
+	function moveSlowlyAnimate(ele,target){
+		clearInterval(ele.timer);
+		
+		ele.timer=setInterval(()=>{
+			let step=(target-ele.offsetLeft)/10;
+			step=step>0?Math.ceil(step):Math.floor(step);
+			if(Math.abs(step)>Math.abs(target-ele.offsetLeft))
+			{
+				ele.style.left=target+"px";
+				clearInterval(ele.timer);
+			}
+			else
+			{
+				ele.style.left=ele.offsetLeft+step+"px";
+			}
+		},30);
+	}
+</script>
+</body>
+</html>

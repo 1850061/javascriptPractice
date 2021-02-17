@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<style>
+		.box1 {
+			margin: 0;
+			padding: 5px;
+			height: 300px;
+			background-color: #ddd;
+			position: relative;
+		}
+		
+		button {
+			margin: 5px;
+		}
+		
+		.box2 {
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			position: absolute;
+			left: 195px;
+			top: 40px;
+		}
+		
+		.box3 {
+			width: 100px;
+			height: 100px;
+			background-color: yellow;
+			position: absolute;
+			left: 0;
+			top: 150px;
+		}
+	</style>
+</head>
+<body>
+<div class="box1" id="box1">
+	<button onclick="javascript:moveToTarget(200)">运动到 left = 200px</button>
+	<button onclick="javascript:moveToTarget(400)">运动到 left = 400px</button>
+	<div class="box2" id="box2"></div>
+	<div class="box3" id="box3"></div>
+</div>
+
+<script>
+	let box2=document.getElementById("box2");
+	let box3=document.getElementById("box3");
+	function moveToTarget(target) {
+		moveAnimate(box2,target);
+		moveAnimate(box3,target);
+	}
+	
+	function moveAnimate(ele,target) {
+		clearInterval(ele.timer);
+		
+		ele.timer=setInterval(()=>{
+			let speed=target>ele.offsetLeft?10:-10;
+			let dis=Math.abs(ele.offsetLeft-target);
+			if(dis<Math.abs(speed))
+			{
+				ele.style.left=ele.offsetLeft+dis+"px";
+			}
+			else
+			{
+				ele.style.left=ele.offsetLeft+speed+"px";
+			}
+		},30);
+	}
+</script>
+
+</body>
+</html>

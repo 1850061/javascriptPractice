@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>选择你的大学）</title>
+	<style type="text/css">
+		body
+		{
+			background-color: blanchedalmond;
+		}
+		
+		.h1
+		{
+			text-align: center;
+			color: #FF8C00;
+		}
+		
+		.p1
+		{
+			text-align: center;
+			font-family: "宋体",黑体;
+			color: brown;
+			font-size: 12px; /*字体大小*/
+			line-height: 20px; /*行高*/
+			font-style: italic;/*斜体*/
+			font-variant: small-caps;
+		}
+	
+	</style>
+</head>
+<body>
+<h1 class="h1">选择你的大学</h1>
+<p class="p1">（还没写全）</p>
+<select id="city" onchange="addSchool(this.value);">
+	<option value="0">--请选择--</option>
+	<option value="上海">上海</option>
+	<option value="北京">北京</option>
+	<option value="湖北">湖北</option>
+	<option value="江苏">江苏</option>
+</select>
+
+<select id="university">
+
+</select>
+<script>
+	var school = new Array(4);
+	school[0] = ["上海","复旦大学","交通大学","同济大学","华东师范大学","上海建桥大学","上海大学","华东理工大学","华东政法大学"];
+	school[1] = ["北京","清华大学","北京大学","北大青鸟","北京理工大学","北京航空航天大学","北京师范大学"];
+	school[2] = ["湖北","华中科技大学","武汉大学","华中农业大学","武汉理工大学"];
+	school[3] = ["江苏","南京大学","东南大学","南京理工大学","南京理工大学","南京航空航天大学"];
+	function addSchool(val)
+	{
+		let univ=document.getElementById("university");
+		let options=univ.getElementsByTagName("option");
+		for(let i=options.length-1;i>=0;i--)
+		{
+			options[i].parentElement.removeChild(options[i]);
+		}
+		for(let i=0;i<4;i++)
+		{
+			if(school[i][0]===val)
+			{
+				for(let j=1;j<school[i].length;j++)
+				{
+					let newOption=document.createElement("option");
+					let newTextNode=document.createTextNode(school[i][j]);
+					newOption.appendChild(newTextNode);
+					univ.appendChild(newOption);
+				}
+			}
+		}
+	}
+</script>
+</body>
+</html>

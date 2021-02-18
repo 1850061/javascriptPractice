@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<body>
+<script src="../tool.js"></script>
+<script>
+	window.onresize=function (){
+		console.log("宽"+client().width);
+		console.log("高"+client().height);
+		console.log("-----");
+		if(client().width>960)
+			document.body.style.backgroundColor="red";
+		else if(client().width>650)
+			document.body.style.backgroundColor="green";
+		else
+			document.body.style.backgroundColor="blue";
+	}
+</script>
+</body>
+</html>

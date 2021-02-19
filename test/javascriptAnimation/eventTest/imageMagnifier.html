@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		.box {
+			width: 200px;
+			height: 333px;
+			margin: 100px;
+			border: 1px solid #ccc;
+			position: relative;
+		}
+		
+		.big {
+			width: 200px;
+			height: 333px;
+			position: absolute;
+			top: 0;
+			left: 360px;
+			border: 1px solid #ccc;
+			overflow: hidden;
+			display: none;
+		}
+		
+		/*mask的中文是：遮罩*/
+		.mask {
+			width: 75px;
+			height: 75px;
+			background: rgba(255, 255, 0, 0.4);
+			position: absolute;
+			top: 0;
+			left: 0;
+			cursor: move;
+			display: none;
+		}
+		
+		.small {
+			position: relative;
+		}
+		
+		img {
+			vertical-align: top;
+		}
+	</style>
+</head>
+<body>
+
+<script src="../tool.js"></script>
+<script>
+	window.onload=function (){
+		let small=document.getElementsByClassName("small")[0];
+		let mask=document.getElementsByClassName("mask")[0];
+		let big=document.getElementsByClassName("big")[0];
+		let bigImg=document.getElementsByClassName("big")[0].children[0];
+		
+		small.onmouseenter=function (){
+			show(mask);
+			show(big);
+		}
+		
+		small.onmouseleave=function (){
+			hide(mask);
+			hide(big);
+		}
+		
+		small.onmousemove=function (event) {
+			event=event||window.event;
+			let pageX=event.pageX||scroll().left+event.clientX;
+			let pageY=event.pageY||scroll().left+event.clientY;
+			let xInBox=pageX-small.parentNode.offsetLeft;
+			let topInBox=pageY-small.parentNode.offsetTop;
+			let maskLeft=xInBox-mask.offsetWidth/2;
+			let maskTop=topInBox-mask.offsetHeight/2;
+			
+			if(maskLeft<0)
+				maskLeft=0;
+			else if(maskLeft>small.offsetWidth-mask.offsetWidth)
+				maskLeft=small.offsetWidth-mask.offsetWidth;
+			
+			if(maskTop<0)
+				maskTop=0;
+			else if(maskTop>small.offsetHeight-mask.offsetHeight)
+				maskTop=small.offsetHeight-mask.offsetHeight;
+			
+			mask.style.left=maskLeft+"px";
+			mask.style.top = maskTop+"px";
+			
+			let biliImgLeft=bigImg.offsetWidth/small.offsetWidth;
+			let biliImgTop=bigImg.offsetHeight/small.offsetHeight;
+			
+			let bigImgLeft=biliImgLeft*maskLeft<(bigImg.width-big.offsetWidth)?biliImgLeft*maskLeft:(bigImg.width-big.offsetWidth);
+			let bigImgTop=biliImgTop*maskTop<(bigImg.height-big.offsetHeight)?biliImgTop*maskTop:(bigImg.height-big.offsetHeight);
+			
+			bigImg.style.marginLeft=-bigImgLeft+"px";
+			bigImg.style.marginTop=-bigImgTop+"px";
+		}
+	}
+</script>
+
+<div class="box">
+	<div class="small">
+		<img src="../../../resource/images/1.jpg" width="200" height="333" alt=""/>
+		<div class="mask"></div>
+	</div>
+	<div class="big">
+		<img src="../../../resource/images/1.jpg" width="400" height="666" alt=""/>
+	</div>
+</div>
+</body>
+</html>

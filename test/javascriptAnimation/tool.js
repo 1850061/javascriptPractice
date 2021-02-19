@@ -26,3 +26,11 @@ function client() {
         }
     }
 }
+
+function show(ele) {
+    ele.style.display = "block";
+}
+
+function hide(ele) {
+    ele.style.display = "none";
+}

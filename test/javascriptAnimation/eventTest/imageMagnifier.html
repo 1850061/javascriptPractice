@@ -95,7 +95,7 @@
 			let biliImgTop=bigImg.offsetHeight/small.offsetHeight;
 			
 			let bigImgLeft=biliImgLeft*maskLeft<(bigImg.width-big.offsetWidth)?biliImgLeft*maskLeft:(bigImg.width-big.offsetWidth);
-			let bigImgTop=biliImgTop*maskTop<(bigImg.height-big.offsetHeight)?biliImgTop*maskTop:(bigImg.height-big.offsetHeight);
+			let bigImgTop=biliImgTop*maskTop< (bigImg.height-big.offsetHeight)?biliImgTop*maskTop:(bigImg.height-big.offsetHeight);
 			
 			bigImg.style.marginLeft=-bigImgLeft+"px";
 			bigImg.style.marginTop=-bigImgTop+"px";

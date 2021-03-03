@@ -53,11 +53,13 @@
 		let menu=$(".wrap>ul>li");
 		
 		menu.mouseenter(function (){
-			$(this).children("ul").show();
+			//$(this).children("ul").show();
+			$(this).children("ul").stop().slideDown(500);
 		})
 		
 		menu.mouseleave(function (){
-			$(this).children("ul").hide();
+			//$(this).children("ul").hide();
+			$(this).children("ul").stop().slideUp(500);
 		})
 	})
 	</script>

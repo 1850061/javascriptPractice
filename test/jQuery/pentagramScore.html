@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>五角星评分案例</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		
+		.comment {
+			font-size: 40px;
+			color: #ff3100;
+		}
+		
+		.comment li {
+			float: left;
+			cursor: pointer;
+		}
+		
+		ul {
+			list-style: none;
+		}
+	</style>
+	<script src="../jquery-1.11.1.min.js"></script>
+	<script>
+		$(function () {
+			let star_none = '☆'; // 空心五角星
+			let star_sel = '★'; // 实心五角星
+			
+			$(".comment>li").click(function (){
+				$(this).attr("clicked","current").siblings().removeAttr("clicked");
+			})
+			
+			$(".comment>li").mouseenter(function (){
+				$(this).text(star_sel).prevAll("li").text(star_sel).end()
+				.nextAll("li").text(star_none);
+			})
+			
+			$(".comment>li").mouseleave(function (){
+				if($("li[clicked]").length==0)
+				{
+					$(this).text(star_none).siblings().text(star_none);
+				}
+				else
+				{
+					$("li[clicked='current']").text(star_sel).prevAll("li").text(star_sel).end()
+							.nextAll("li").text(star_none);
+				}
+			})
+		})
+	</script>
+</head>
+<body>
+<ul class="comment">
+	<li>☆</li>
+	<li>☆</li>
+	<li>☆</li>
+	<li>☆</li>
+	<li>☆</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+</head>
+<script src="../jquery-1.11.1.min.js"></script>
+<script>
+	$(function(){
+		$("#summit").click(function(){
+			let siblings=$(this).prevAll("input");
+			let data={};
+			data["userName"]=siblings[1].value;
+			data["password"]=siblings[0].value;
+			console.log(JSON.stringify(data));
+			//ajax请求，可以post，不可以跨源
+			$.ajax({
+				url:"https://localhost:5001/B",
+				data:JSON.stringify(data),
+				dataType:"json",
+				contentType: "application/json",
+				type:"post",
+				success:function(data){
+					console.log(data);
+					alert(data["UserName"]+" "+data["Password"]);
+					//$("#showInfo").html(data);
+				},
+				error:function(e){
+					console.log(e);
+				}
+			});
+			
+		});
+		
+		
+		
+	});
+</script>
+<body>
+<form method="post">
+	<p>username</p><input />
+	<br/>
+	<p>password</p><input />
+	<br/>
+	<input type="button" id="summit" value="提交"/>
+</form>
+</body>
+</html>
